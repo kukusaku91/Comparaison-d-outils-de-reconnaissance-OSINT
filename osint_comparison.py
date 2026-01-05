@@ -1,4 +1,6 @@
 import time
+import os
+from dotenv import load_dotenv
 from OSINT_tools.whois_lookup import get_whois_info
 from OSINT_tools.dns_resolver import resolve_dns
 from OSINT_tools.email_hunter import find_emails
@@ -30,7 +32,8 @@ def compare_osint_tools(domain, api_key):
 
 
 if __name__ == "__main__":
-    api_key = "4877081247da0f62e5019f9fb24fa64ac82b0c99"
+    load_dotenv()
+    api_key = os.getenv("API_KEY")
     domain = "wordpress.org"
     results = compare_osint_tools(domain, api_key)
     print(results)
