@@ -36,4 +36,10 @@ if __name__ == "__main__":
     api_key = os.getenv("API_KEY")
     domain = "wordpress.org"
     results = compare_osint_tools(domain, api_key)
-    print(results)
+    print(f"Domain: {results['domain']}\n")
+    print(f"WHOIS Info: {results['whois_info']}\n")
+    print(f"DNS Info: {results['dns_info']}\n")
+    print(f"Emails: {results['emails']}\n")
+    print(f"WHOIS Time: {results['whois_time']}s\n")
+    print(f"DNS Time: {results['dns_time']}s\n")
+    print(f"Email Time: {results['email_time']}s\n")
