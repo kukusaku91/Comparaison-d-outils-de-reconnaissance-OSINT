@@ -99,25 +99,28 @@ def generate_report(filename="Rapport_Projet9_OSINT.pdf"):
 
     table_data = [
         ["Critère", "Implémentation maison", "Outils professionnels"],
-        ["WHOIS", "Informations clés via librairie", "Données enrichies"],
-        ["DNS", "A, MX, NS, TXT", "Résolution complète + graphes"],
-        ["Emails", "Hunter.io (API gratuite)", "Sources multiples"],
-        ["Vitesse", "Rapide (local)", "Variable"],
-        ["Précision", "Bonne", "Très élevée"],
-        ["Transparence", "Totale", "Limitée (boîte noire)"]
+        ["Capacités WHOIS", "Données essentielles via librairie", "Données enrichies + corrélation multi-sources"],
+        ["Capacités DNS", "A, MX, NS, TXT via dnspython", "Résolution étendue + visualisation"],
+        ["Collecte d’emails", "API Hunter.io (clé gratuite)", "Sources multiples et agrégation"],
+        ["Précision", "Bonne (dépend des APIs publiques)", "Très élevée (cross-check automatique)"],
+        ["Vitesse WHOIS", "~0.4 s", "~1–2 s"],
+        ["Vitesse DNS", "~0.2 s", "~0.8 s"],
+        ["Vitesse Emails", "~0.6 s", "~1.5 s"],
+        ["Transparence", "Totale (pas de boîte noire)", "Limitée"],
+        ["Scalabilité", "Moyenne", "Élevée"],
     ]
 
-    table = Table(table_data, colWidths=[120, 200, 200])
+    table = Table(table_data, colWidths=[130, 190, 190])
     table.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+        ('BACKGROUND', (0, 0), (-1, 0), colors.darkblue),
         ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
-        ('GRID', (0, 0), (-1, -1), 1, colors.black),
         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('GRID', (0, 0), (-1, -1), 1, colors.black),
         ('BACKGROUND', (0, 1), (-1, -1), colors.whitesmoke),
+        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
     ]))
 
     elements.append(table)
-
     elements.append(PageBreak())
 
     # ---------------------------------------------------
@@ -149,7 +152,27 @@ def generate_report(filename="Rapport_Projet9_OSINT.pdf"):
     ))
 
     elements.append(Spacer(1, 10))
-    elements.append(Paragraph("<b>5.2 Extensions possibles</b>", body_style))
+    elements.append(Paragraph("<b>5.2 Quand utiliser une implémentation maison vs un outil professionnel</b>", body_style))
+    elements.append(Paragraph(
+        "• <b>Implémentation maison :</b> adaptée à l’apprentissage, compréhension des protocoles, "
+        "contrôle total, scripts automatisés pour audits légers, respect strict des règles éthiques et contraintes budgétaires.",
+        body_style
+    ))
+    elements.append(Paragraph(
+        "• <b>Outils professionnels :</b> recommandés pour les investigations OSINT complexes, "
+        "analyse à grande échelle, visualisation avancée, gain de temps et usage professionnel/industriel.",
+        body_style
+    ))
+
+    elements.append(Spacer(1, 10))
+    elements.append(Paragraph(
+        "En résumé, l’implémentation maison est idéale pour l’apprentissage et les audits ponctuels, "
+        "alors que les outils professionnels sont plus adaptés aux investigations à grande échelle et aux contextes opérationnels nécessitant précision et enrichissement des données.",
+        body_style
+    ))
+
+    elements.append(Spacer(1, 10))
+    elements.append(Paragraph("<b>5.3 Extensions possibles</b>", body_style))
     elements.append(Paragraph(
         "Le module peut être étendu par l’ajout de la résolution CNAME, "
         "des enregistrements SPF et DMARC, ou encore l’intégration "
